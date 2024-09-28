@@ -10,5 +10,6 @@ func main(){
 	// exec.Capture_output()
 	// exec.Input_pipe()
 	// exec.Output_pipe()
-	exec.Simple_envs()
+	// exec.Simple_envs()
+	exec.Simple_flags()
 }
