@@ -3,5 +3,7 @@ package main
 import "protocols/exec"
 
 func main() {
-	exec.GetConf()
+	exec.ProtobufCase()
+	// exec.ParseJson()
+	// exec.CreateJson()
 }
