@@ -3,12 +3,13 @@ package example
 import (
 	"context"
 	"fmt"
-	"os"
 	"io"
+	"os"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/pkg/stdcopy"
 )
 
 
@@ -43,7 +44,12 @@ func RunContainer() {
 			panic(err)
 		}
 	case status := <- statusCh:
-		fmt.Println("Status", status)
+		fmt.Printf("Status is %d\n", status.StatusCode)
 	}
-
+	
+	out, err := cli.ContainerLogs(ctx, resp.ID, types.ContainerLogsOptions{ShowStdout: true})
+	if err != nil {
+		panic(err)
+	}
+	stdcopy.StdCopy(os.Stdout, os.Stderr, out)
 }
